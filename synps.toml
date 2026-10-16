@@ -1,0 +1,51 @@
+[package]
+name = "yolo26"
+version = "1.0.0"
+description = "YOLO26 object-detection model package for MyeLiN"
+
+[entrypoint]
+package = "yolo26"
+
+[dependencies]
+quantizations = { git = "https://github.com/useplx/Quantizations.git", version = "v1.0.0" }
+
+[weights]
+path = "yolo26n.safetensors"
+
+[policies."yolo26"]
+dtype = "f32"
+
+[policies."yolo26".backend]
+device = "cuda"
+ordinal = 0
+
+[[policies."yolo26".schemes]]
+format = "f32"
+volatile = true
+
+[build.graph]
+namespace = "yolo26"
+toolchain = "cpp"
+sources = [
+    "src/package.cpp",
+    "src/yolo26.cpp",
+    "src/nn",
+]
+exports = ["detector"]
+
+[build.orchestration]
+toolchain = "cpp"
+sources = [
+    "src/entrypoint.cpp",
+    "src/orchestration.cpp",
+    "src/yolo26.cpp",
+    "src/nn",
+]
+
+[build.native]
+toolchain = "cpp"
+sources = ["src/preprocess.cpp"]
+libraries = ["opencv_imgcodecs", "opencv_imgproc", "opencv_core"]
+
+[capabilities]
+provides = ["object-detector"]
