@@ -7,7 +7,7 @@ description = "YOLO26 object-detection model package for MyeLiN"
 package = "yolo26"
 
 [dependencies]
-quantizations = { git = "https://github.com/useplx/Quantizations.git", version = "v1.0.0" }
+f32 = { git = "https://github.com/useplx/Quantizations.git", version = "v1.0.0", subdir = "F32" }
 
 [weights]
 path = "yolo26n.safetensors"

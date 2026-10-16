@@ -32,7 +32,6 @@ Declare Yolo26 and the weight format selected by the application:
 ```toml
 [dependencies]
 yolo26 = { git = "https://github.com/useplx/Yolo26.git", version = "v1.0.0" }
-quantizations = { git = "https://github.com/useplx/Quantizations.git", version = "v1.0.0" }
 ```
 
 Yolo26 exposes three package parts:
